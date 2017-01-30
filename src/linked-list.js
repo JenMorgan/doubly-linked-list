@@ -25,4 +25,3 @@ class LinkedList {
 }
 
 module.exports = LinkedList;
-console.log();
