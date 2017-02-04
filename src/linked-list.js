@@ -24,6 +24,7 @@ class LinkedList {
         }
         this.length++;
         return nodeToAdd;
+        return this;
     }
 
     head() {
@@ -66,6 +67,7 @@ class LinkedList {
         else {
             return -1;
         }
+        return this;
     }
 
     isEmpty() {
@@ -74,16 +76,18 @@ class LinkedList {
 
     clear() {
         var nodeToDelete = this._head;
-        var nodeToDeletePrev = null;
-        for (var i=0;i<this.length;i++) {
+        var nodeToDeletePrev=null;
+        while (nodeToDelete.next) {
             nodeToDeletePrev = nodeToDelete;
             nodeToDelete = nodeToDelete.next;
-            nodeToDeletePrev = null;
-            this.length--
+            nodeToDeletePrev=null;
+            this._head=nodeToDelete;
+            this.length--;
         }
-        nodeToDelete = null;
+        nodeToDeletePrev=null;
+        nodeToDelete=null;
+        this._tail = null;
         this.length--;
-        this.isEmpty();
     }
 
     deleteAt(x) {
@@ -113,21 +117,21 @@ class LinkedList {
         nodeToDelete = null;
         this.length--
         return nodeToDelete;
+        return this;
     }
 
     reverse() {
-        var node = this._head;
-        var nodeprev = null;
-        var rev;
-
-        while (node.next) {
-            nodeprev = node.prev;
-            rev = node.next;
-            node.next = nodeprev;
-            nodeprev = node;
-            node = rev;
+        while (!this._head) {
+            var save = this_head.next;
+            this._head.next = this._head.prev;
+            this._head.prev=save;
+            if (!save) {
+                break;
+            }
+            this._head=save;
         }
-        return nodeprev;
+        return this._head;
+        return this;
     }
 
     indexOf(dataWeAreLookingFor) {
